@@ -11,7 +11,7 @@ public class PlayerMonitor : MonoBehaviour {
 	void Update () 
 	{
 		
-		txt.text = string.Concat(Mathf.Abs(Mathf.Round(playerRb.velocity.x)),"m/s");	
+		txt.text = string.Concat((Mathf.Abs(playerRb.position.x * Time.deltaTime)).ToString("F1"),"m/s");	
 	}
 }
 #endif
