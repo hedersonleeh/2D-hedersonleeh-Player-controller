@@ -23,7 +23,7 @@ public class CharacterController2D : MonoBehaviour
     [BoxGroup("States"), ReadOnly, SerializeField] private bool isGrounded;
     [BoxGroup("States"), ReadOnly, SerializeField] private bool facingRight = true;
     [BoxGroup("Movement"), Range(0, .1f), SerializeField] private float movementSmoothing = .05f;
-    [BoxGroup("Movement"),Range(0,30f), SerializeField] private float jumpforce ;
+    [BoxGroup("Movement"),  SerializeField] private float jumpforce;
     //[BoxGroup("Movement"), SerializeField] private float dashForce = 100f;
 
     private Vector3 targetVelocity;
@@ -36,12 +36,15 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = false;
-        isGrounded = Physics2D.OverlapCircle((Vector2)bottomCheck.position, bottomCheckRadius
-                                                                      , whatIsGround);
+        if (isGrounded = Physics2D.OverlapCircle((Vector2)bottomCheck.position, bottomCheckRadius, whatIsGround))
+            isGrounded = true;
+        else
+            isGrounded = false;
 
-   
-               
+
+
+
+
 
     }
     private void OnDrawGizmosSelected()
@@ -51,6 +54,7 @@ public class CharacterController2D : MonoBehaviour
     }
     public void Move(float move, bool jump, bool crouch)
     {
+                
 
         if (crouch && isGrounded)
             move = 0;
@@ -58,7 +62,8 @@ public class CharacterController2D : MonoBehaviour
         if (airControl || isGrounded)
         {
             targetVelocity = new Vector2(move * 10f, rb.velocity.y);
-
+            
+            //transform.Translate(Vector3.right * move);
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
 
             if (move < 0 && !facingRight)
@@ -69,9 +74,9 @@ public class CharacterController2D : MonoBehaviour
 
 
 
-        if (isGrounded && jump)
+        if (isGrounded && jump )
         {
-            rb.velocity = new Vector2(rb.velocity.x, 1* jumpforce);          
+            rb.AddForce(Vector2.up * jumpforce * Time.deltaTime, ForceMode2D.Impulse);
             isGrounded = false;
         }
     }

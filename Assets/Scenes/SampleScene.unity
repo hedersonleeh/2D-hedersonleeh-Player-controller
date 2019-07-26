@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 1173445353}
   - component: {fileID: 1173445355}
   - component: {fileID: 1173445356}
+  - component: {fileID: 1173445359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -485,10 +486,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -514,8 +515,7 @@ MonoBehaviour:
   isGrounded: 0
   facingRight: 0
   movementSmoothing: 0.05
-  jumpforce: 15
-  dashForce: 100
+  jumpforce: 250
 --- !u!222 &1173445353
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -550,8 +550,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.31853247}
-  m_Size: {x: 1.06, y: 1.4879351}
+  m_Offset: {x: -0.02735582, y: -0.049534082}
+  m_Size: {x: 0.60695523, y: 1.0720034}
   m_Direction: 0
 --- !u!58 &1173445356
 CircleCollider2D:
@@ -594,7 +594,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1173445357}
   fallMultiplier: 2.5
-  lowJumpMultiplier: 9
+  lowJumpMultiplier: 5
+--- !u!61 &1173445359
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1173445348}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05471173, y: -0.63830066}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.4583334, y: 2.125}
+    newSize: {x: 0.546875, y: 0.796875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2941985, y: 0.46541834}
+  m_EdgeRadius: 0
 --- !u!1 &1326630774
 GameObject:
   m_ObjectHideFlags: 0

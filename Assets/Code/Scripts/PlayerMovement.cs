@@ -15,10 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch;
     private bool jump;
 
-    public bool IsJumping
-    {
-        get { return jump; }
-    }
+
 
     // Use this for initialization
     private void Awake()
@@ -35,10 +32,17 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMove = Input.GetAxis("Horizontal") * speed;
         crouch = Input.GetAxisRaw("Vertical") < 0;
-        jump = Input.GetButtonDown("Jump");
+        if (Input.GetButtonDown("Jump")) jump = true;
+
+
+
     }
     private void FixedUpdate()
     {
+
         controller2D.Move(horizontalMove * Time.deltaTime, jump, crouch);
+
+        jump = false;
+
     }
 }
