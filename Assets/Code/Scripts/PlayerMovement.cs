@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     // Use this for initialization
     private void Awake()
     {
@@ -39,10 +40,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         controller2D.Move(horizontalMove * Time.deltaTime, jump, crouch);
-
         jump = false;
 
     }
+    public float HorizontalMove { get { return horizontalMove; } }
+
+    public bool Crouch { get { return crouch; } }
+
+    public bool Jump { get { return jump; } }
 }
