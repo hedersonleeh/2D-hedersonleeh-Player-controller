@@ -25,6 +25,7 @@ public class CharacterController2D : MonoBehaviour
     [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpDirection;
     [BoxGroup("Movement"), SerializeField] private RaycastHit2D wallRayCheck;
     //[BoxGroup("Movement"), SerializeField] private float dashForce = 100f;
+    [BoxGroup("Movement"), SerializeField, ReadOnly] private bool isWallJumping = false;
 
     private Vector3 targetVelocity;
     private Rigidbody2D rb;
@@ -44,7 +45,10 @@ public class CharacterController2D : MonoBehaviour
         if (isGrounded = Physics2D.OverlapBox((Vector2)bottomCheck.position, checkBoxSize, 0f, whatIsGround))
             isGrounded = true;
         else
+        {
+            //isWallJumping = false;
             isGrounded = false;
+        }
 
         if (wallJump)
         {
@@ -89,6 +93,10 @@ public class CharacterController2D : MonoBehaviour
         else if (ReadyToWallJump && jump)
             if (!isGrounded) WallJump();
 
+        airControl = isWallJumping ? false : true; 
+        if(isWallJumping && rb.velocity.y < 0)
+        isWallJumping = false;
+
     }
 
     public void Flip()
@@ -100,12 +108,15 @@ public class CharacterController2D : MonoBehaviour
 
     }
 
+
     private void WallJump()
     {
+        isWallJumping = true;
         Vector2 wallJumpTargetVelocity;
         rb.velocity = Vector2.zero;
-        wallJumpTargetVelocity = new Vector2(rb.velocity.x + (wallJumpDirection.x * wallJumpForce.x * Time.deltaTime)
-                                             ,rb.velocity.y + wallJumpForce.y * Time.deltaTime);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, wallJumpTargetVelocity, ref velocity,0.2f);
+        wallJumpTargetVelocity = wallJumpForce*wallJumpDirection;
+        //rb.velocity = Vector3.SmoothDamp(rb.velocity, wallJumpTargetVelocity, ref velocity,0.2f);
+        rb.velocity = new Vector2(wallJumpTargetVelocity.x*Time.deltaTime,wallJumpForce.y*Time.deltaTime);
+        Flip();
     }
 }
