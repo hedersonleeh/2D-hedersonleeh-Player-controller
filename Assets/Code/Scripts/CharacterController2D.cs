@@ -24,7 +24,6 @@ public class CharacterController2D : MonoBehaviour
     [BoxGroup("Movement"), SerializeField, ReadOnly] private bool ReadyToWallJump = false;
     [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpDirection;
     [BoxGroup("Movement"), SerializeField] private RaycastHit2D wallRayCheck;
-    //[BoxGroup("Movement"), SerializeField] private float dashForce = 100f;
     [BoxGroup("Movement"), SerializeField, ReadOnly] private bool isWallJumping = false;
 
     private Vector3 targetVelocity;
@@ -35,7 +34,6 @@ public class CharacterController2D : MonoBehaviour
 
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -43,7 +41,10 @@ public class CharacterController2D : MonoBehaviour
     {
 
         if (isGrounded = Physics2D.OverlapBox((Vector2)bottomCheck.position, checkBoxSize, 0f, whatIsGround))
+        {
             isGrounded = true;
+            isWallJumping = false;
+        }
         else
         {
             //isWallJumping = false;
@@ -76,8 +77,12 @@ public class CharacterController2D : MonoBehaviour
         {
             targetVelocity = new Vector2(move * 10f, rb.velocity.y);
 
+            if (!isWallJumping)
+                rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+            else
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.1f), rb.velocity.y);
+            //rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector2(targetVelocity.x * 0.2f + targetVelocity.x, targetVelocity.y), ref velocity, movementSmoothing);
 
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
 
             if (move < 0 && !facingRight)
                 Flip();
@@ -91,32 +96,38 @@ public class CharacterController2D : MonoBehaviour
             isGrounded = false;
         }
         else if (ReadyToWallJump && jump)
-            if (!isGrounded) WallJump();
+            if (!isGrounded && move * wallJumpDirection.x < 0) WallJump();
 
-        airControl = isWallJumping ? false : true; 
-        if(isWallJumping && rb.velocity.y < 0)
-        isWallJumping = false;
+
+        //if (isWallJumping && rb.velocity.y < 0)
+
 
     }
 
     public void Flip()
     {
         facingRight = !facingRight;
-
         if (facingRight) transform.localEulerAngles = Vector3.up * 180;
         else transform.localEulerAngles = Vector3.up * 0;
-
     }
 
 
     private void WallJump()
     {
-        isWallJumping = true;
-        Vector2 wallJumpTargetVelocity;
-        rb.velocity = Vector2.zero;
-        wallJumpTargetVelocity = wallJumpForce*wallJumpDirection;
-        //rb.velocity = Vector3.SmoothDamp(rb.velocity, wallJumpTargetVelocity, ref velocity,0.2f);
-        rb.velocity = new Vector2(wallJumpTargetVelocity.x*Time.deltaTime,wallJumpForce.y*Time.deltaTime);
+        StopCoroutine(DisableMove(0));
         Flip();
+        StartCoroutine(DisableMove(0.1f));
+        isWallJumping = true;
+        rb.velocity = Vector2.zero;
+        Vector2 wallJumpTargetVelocity = wallJumpForce * wallJumpDirection;
+        rb.velocity = new Vector2(wallJumpTargetVelocity.x * Time.deltaTime, wallJumpForce.y * Time.deltaTime);
+
+    }
+    IEnumerator DisableMove(float timeDisable)
+    {
+        
+        airControl = false;
+        yield return new WaitForSeconds(timeDisable);
+        airControl = true;
     }
 }
