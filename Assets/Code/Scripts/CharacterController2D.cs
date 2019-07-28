@@ -80,28 +80,49 @@ public class CharacterController2D : MonoBehaviour
             if (!isWallJumping)
                 rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
             else
-                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.1f), rb.velocity.y);
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.2f), rb.velocity.y);
             //rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector2(targetVelocity.x * 0.2f + targetVelocity.x, targetVelocity.y), ref velocity, movementSmoothing);
 
+            ChangeFace(move);
 
-            if (move < 0 && !facingRight)
-                Flip();
-            else if (move > 0 && facingRight)
-                Flip();
         }
 
         if (isGrounded && jump)
         {
-            rb.AddForce(Vector2.up * jumpforce * Time.deltaTime, ForceMode2D.Impulse);
-            isGrounded = false;
+            Jump(jumpforce);
         }
         else if (ReadyToWallJump && jump)
             if (!isGrounded && move * wallJumpDirection.x < 0) WallJump();
+            
 
 
-        //if (isWallJumping && rb.velocity.y < 0)
+        
 
 
+    }
+
+    private void Jump(float force)
+    {
+        rb.AddForce(Vector2.up *force* Time.deltaTime, ForceMode2D.Impulse);
+        isGrounded = false;
+    }
+
+    private void ChangeFace(float move)
+    {
+        if (isWallJumping)
+        {
+            if (rb.velocity.x < 0 && !facingRight)
+                Flip();
+            else if (rb.velocity.x > 0 && facingRight)
+                Flip();
+        }
+        else if (!isWallJumping)
+        {
+            if (move < 0 && !facingRight && !isWallJumping)
+                Flip();
+            else if (move > 0 && facingRight && !isWallJumping)
+                Flip();
+        }
     }
 
     public void Flip()
@@ -125,9 +146,10 @@ public class CharacterController2D : MonoBehaviour
     }
     IEnumerator DisableMove(float timeDisable)
     {
-        
+
         airControl = false;
         yield return new WaitForSeconds(timeDisable);
         airControl = true;
+
     }
 }
