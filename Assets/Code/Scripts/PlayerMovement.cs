@@ -11,9 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController2D controller2D;
     [SerializeField, Range(0, 50f)] private float speed = 50f;
 
-    private float horizontalMove;
+    private Vector2 moveDirection;
     private bool crouch;
     private bool jump;
+    private bool climb;
 
 
 
@@ -31,20 +32,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Inputs()
     {
-        horizontalMove = Input.GetAxis("Horizontal") * speed;
+
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical")); ;
         crouch = Input.GetAxisRaw("Vertical") < 0;
         if (Input.GetButtonDown("Jump")) jump = true;
-
-
+        climb = Input.GetButton("Fire3");
 
     }
     private void FixedUpdate()
     {
-        controller2D.Move(horizontalMove * Time.deltaTime, jump, crouch);
+        controller2D.Move(moveDirection * Time.deltaTime, jump, crouch, climb);
         jump = false;
 
     }
-    public float HorizontalMove { get { return horizontalMove; } }
+    public Vector2 MoveDirection { get { return moveDirection; } }
 
     public bool Crouch { get { return crouch; } }
 

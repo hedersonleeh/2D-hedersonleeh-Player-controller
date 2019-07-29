@@ -13,7 +13,7 @@ public class CharacterController2D : MonoBehaviour
     [BoxGroup("checks"), SerializeField] private Transform bottomCheck;
     [BoxGroup("checks"), SerializeField] private LayerMask whatIsGround;
     [SerializeField, BoxGroup("checks")] private Vector2 checkBoxSize;
-    [SerializeField, BoxGroup("checks")] private bool airControl = true;
+    [SerializeField, BoxGroup("checks")] private bool ControlAir;
     [BoxGroup("States"), ReadOnly, SerializeField] private bool isGrounded;
     [BoxGroup("States"), ReadOnly, SerializeField] private bool facingRight = true;
     [BoxGroup("Movement"), Range(0, .1f), SerializeField] private float movementSmoothing = .05f;
@@ -21,17 +21,22 @@ public class CharacterController2D : MonoBehaviour
     [BoxGroup("Movement"), SerializeField] private bool wallJump;
     [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpForce;
     [BoxGroup("Movement"), SerializeField] private float distanceToWallJump;
-    [BoxGroup("Movement"), SerializeField, ReadOnly] private bool ReadyToWallJump = false;
+    [BoxGroup("Movement"), SerializeField, ReadOnly] private bool wallCheckInAir = false;
     [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpDirection;
     [BoxGroup("Movement"), SerializeField] private RaycastHit2D wallRayCheck;
     [BoxGroup("Movement"), SerializeField, ReadOnly] private bool isWallJumping = false;
+    [BoxGroup("WallSlide"), SerializeField] private float wallSlideSpeed;
+    [BoxGroup("WallSlide"), SerializeField] private bool canWallSlide = false;
+
+    [BoxGroup("Climp"), SerializeField] private float climpSpeed;
+
 
     private Vector3 targetVelocity;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
 
-    public bool IsGrounded { get { return isGrounded; } }
-
+    private bool isClimbing = false;
+    private bool airControl = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,7 +52,6 @@ public class CharacterController2D : MonoBehaviour
         }
         else
         {
-            //isWallJumping = false;
             isGrounded = false;
         }
 
@@ -56,10 +60,8 @@ public class CharacterController2D : MonoBehaviour
             if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, distanceToWallJump, whatIsGround))
             {
                 wallJumpDirection = wallRayCheck.normal;
-                ReadyToWallJump = true;
             }
-            else
-                ReadyToWallJump = false;
+
         }
     }
     private void OnDrawGizmosSelected()
@@ -68,46 +70,69 @@ public class CharacterController2D : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(bottomCheck.position, checkBoxSize);
     }
-    public void Move(float move, bool jump, bool crouch)
+    public void Move(Vector2 dir, bool jump, bool crouch, bool climb)
     {
-        if (crouch && isGrounded)
-            move = 0;
 
-        if (airControl || isGrounded)
+        if (!isClimbing && (airControl || isGrounded))
         {
-            targetVelocity = new Vector2(move * 10f, rb.velocity.y);
+            Debug.Log("Paso!");
+            targetVelocity = new Vector2(dir.x * 10f, rb.velocity.y);
 
             if (!isWallJumping)
                 rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
             else
                 rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.2f), rb.velocity.y);
-            //rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector2(targetVelocity.x * 0.2f + targetVelocity.x, targetVelocity.y), ref velocity, movementSmoothing);
-
-            ChangeFace(move);
-
+            ChangeFace(dir.x);
         }
+
+        if (crouch && isGrounded)
+            dir.x = 0;
+        DynamicMoves(dir, jump, climb);
+
+    }
+
+    private void DynamicMoves(Vector2 dir, bool jump, bool climb)
+    {
+        wallCheckInAir = wallRayCheck && !isGrounded && dir.x * wallJumpDirection.x < 0;
+
+        if (wallRayCheck && climb)
+            isClimbing = Climb(dir);
+        else
+            isClimbing = false;
+
+        if (canWallSlide && rb.velocity.y < 0 && wallCheckInAir)
+            if (!climb) WallSlide(wallSlideSpeed);
 
         if (isGrounded && jump)
-        {
             Jump(jumpforce);
-        }
-        else if (ReadyToWallJump && jump)
-            if (!isGrounded && move * wallJumpDirection.x < 0) WallJump();
-            
+        else if (wallCheckInAir && jump)
+            WallJump();
+    }
+
+    private bool Climb(Vector2 dir)
+    {
+        bool isClimbing = true;
+        rb.gravityScale = 0;
+        Debug.Log(dir.y);
+        targetVelocity = new Vector2(0, dir.y * climpSpeed * 10f);
+        rb.velocity = targetVelocity;
+        return isClimbing;
+    }
 
 
-        
-
-
+    private void WallSlide(float speed)
+    {
+        Debug.Log("FlagWallSide");
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / speed);
     }
 
     private void Jump(float force)
     {
-        rb.AddForce(Vector2.up *force* Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * force * Time.deltaTime, ForceMode2D.Impulse);
         isGrounded = false;
     }
 
-    private void ChangeFace(float move)
+    private void ChangeFace(float dir)
     {
         if (isWallJumping)
         {
@@ -118,9 +143,9 @@ public class CharacterController2D : MonoBehaviour
         }
         else if (!isWallJumping)
         {
-            if (move < 0 && !facingRight && !isWallJumping)
+            if (dir < 0 && !facingRight && !isWallJumping)
                 Flip();
-            else if (move > 0 && facingRight && !isWallJumping)
+            else if (dir > 0 && facingRight && !isWallJumping)
                 Flip();
         }
     }
@@ -146,10 +171,9 @@ public class CharacterController2D : MonoBehaviour
     }
     IEnumerator DisableMove(float timeDisable)
     {
-
         airControl = false;
         yield return new WaitForSeconds(timeDisable);
-        airControl = true;
-
+        airControl = ControlAir;
     }
+    public bool IsGrounded { get { return isGrounded; } }
 }
