@@ -10,33 +10,38 @@ using System;
 public class CharacterController2D : MonoBehaviour
 {
 
-    [BoxGroup("checks"), SerializeField] private Transform bottomCheck;
-    [BoxGroup("checks"), SerializeField] private LayerMask whatIsGround;
-    [SerializeField, BoxGroup("checks")] private Vector2 checkBoxSize;
-    [SerializeField, BoxGroup("checks")] private bool ControlAir;
-    [BoxGroup("States"), ReadOnly, SerializeField] private bool isGrounded;
-    [BoxGroup("States"), ReadOnly, SerializeField] private bool facingRight = true;
-    [BoxGroup("Movement"), Range(0, .1f), SerializeField] private float movementSmoothing = .05f;
-    [BoxGroup("Movement"), SerializeField] private float jumpforce;
-    [BoxGroup("Movement"), SerializeField] private bool wallJump;
-    [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpForce;
-    [BoxGroup("Movement"), SerializeField] private float distanceToWallJump;
-    [BoxGroup("Movement"), SerializeField, ReadOnly] private bool wallCheckInAir = false;
-    [BoxGroup("Movement"), SerializeField] private Vector2 wallJumpDirection;
-    [BoxGroup("Movement"), SerializeField] private RaycastHit2D wallRayCheck;
-    [BoxGroup("Movement"), SerializeField, ReadOnly] private bool isWallJumping = false;
-    [BoxGroup("WallSlide"), SerializeField] private float wallSlideSpeed;
-    [BoxGroup("WallSlide"), SerializeField] private bool canWallSlide = false;
+    [SerializeField, BoxGroup("Checks")] private Transform bottomCheck;
+    [SerializeField, BoxGroup("Checks")] private LayerMask whatIsGround;
+    [SerializeField, BoxGroup("Checks")] private Vector2 checkBoxSize;
+    [SerializeField, BoxGroup("Checks")] private float wallCheck;
 
-    [BoxGroup("Climp"), SerializeField] private float climpSpeed;
+    [Space]
+    [SerializeField, Range(0, .1f), BoxGroup("Values")] private float movementSmoothing = .05f;
+    [SerializeField, BoxGroup("Values"),] private Vector2 wallJumpForce;
+    [SerializeField, BoxGroup("Values")] private float jumpforce;
+    [SerializeField, BoxGroup("Values")] private float wallSlideSpeed;
+    [SerializeField, BoxGroup("Values")] private float climpSpeed;
+
+    [Space]
+    [SerializeField, BoxGroup("Booleans")] private bool canWallSlide = false;
+    [SerializeField, BoxGroup("Booleans")] private bool wallJump;
+    [SerializeField, BoxGroup("Booleans")] private bool ControlAir;
+
+    [Space]
+    [SerializeField, ReadOnly, BoxGroup("States")] private bool isGrounded;
+    [SerializeField, ReadOnly, BoxGroup("States")] private bool facingRight = true;
+    [SerializeField, ReadOnly, BoxGroup("States")] private bool isWallJumping = false;
+    [SerializeField, ReadOnly, BoxGroup("States")] private bool wallCheckInAir = false;
 
 
     private Vector3 targetVelocity;
     private Rigidbody2D rb;
+    private RaycastHit2D wallRayCheck;
     private Vector3 velocity = Vector3.zero;
 
     private bool isClimbing = false;
     private bool airControl = true;
+    private Vector2 wallJumpDirection;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,28 +50,20 @@ public class CharacterController2D : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (isGrounded = Physics2D.OverlapBox((Vector2)bottomCheck.position, checkBoxSize, 0f, whatIsGround))
-        {
-            isGrounded = true;
-            isWallJumping = false;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        isGrounded = Physics2D.OverlapBox((Vector2)bottomCheck.position, checkBoxSize, 0f, whatIsGround);
+
+        isWallJumping = !isGrounded;
 
         if (wallJump)
-        {
-            if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, distanceToWallJump, whatIsGround))
-            {
+            if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, wallCheck, whatIsGround))
                 wallJumpDirection = wallRayCheck.normal;
-            }
 
-        }
+
+
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawRay(transform.position, transform.right * distanceToWallJump);
+        Gizmos.DrawRay(transform.position, transform.right * wallCheck);
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(bottomCheck.position, checkBoxSize);
     }
@@ -75,7 +72,6 @@ public class CharacterController2D : MonoBehaviour
 
         if (!isClimbing && (airControl || isGrounded))
         {
-            Debug.Log("Paso!");
             targetVelocity = new Vector2(dir.x * 10f, rb.velocity.y);
 
             if (!isWallJumping)
@@ -87,7 +83,11 @@ public class CharacterController2D : MonoBehaviour
 
         if (crouch && isGrounded)
             dir.x = 0;
+        
         DynamicMoves(dir, jump, climb);
+       
+        
+
 
     }
 
@@ -96,7 +96,11 @@ public class CharacterController2D : MonoBehaviour
         wallCheckInAir = wallRayCheck && !isGrounded && dir.x * wallJumpDirection.x < 0;
 
         if (wallRayCheck && climb)
+        {
             isClimbing = Climb(dir);
+            if (jump && !isGrounded)
+                WallJump();
+        }
         else
             isClimbing = false;
 
@@ -111,25 +115,22 @@ public class CharacterController2D : MonoBehaviour
 
     private bool Climb(Vector2 dir)
     {
-        bool isClimbing = true;
         rb.gravityScale = 0;
-        Debug.Log(dir.y);
-        targetVelocity = new Vector2(0, dir.y * climpSpeed * 10f);
-        rb.velocity = targetVelocity;
-        return isClimbing;
-    }
 
+        targetVelocity = new Vector2(0, dir.y * climpSpeed * 10f);
+
+        rb.velocity = targetVelocity;
+        return isClimbing = true;
+    }
 
     private void WallSlide(float speed)
     {
-        Debug.Log("FlagWallSide");
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / speed);
     }
 
     private void Jump(float force)
     {
         rb.AddForce(Vector2.up * force * Time.deltaTime, ForceMode2D.Impulse);
-        isGrounded = false;
     }
 
     private void ChangeFace(float dir)

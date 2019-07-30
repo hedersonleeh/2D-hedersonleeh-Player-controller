@@ -712,17 +712,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   checkBoxSize: {x: 0.96, y: 0.32}
-  airControl: 1
+  wallCheck: 0.7
+  movementSmoothing: 0.02
+  wallJumpForce: {x: 400, y: 400}
+  jumpforce: 700
+  wallSlideSpeed: 2
+  climpSpeed: 15
+  canWallSlide: 1
+  wallJump: 1
+  ControlAir: 1
   isGrounded: 1
   facingRight: 0
-  movementSmoothing: 0.02
-  jumpforce: 700
-  wallJump: 1
-  wallJumpForce: {x: 400, y: 400}
-  distanceToWallJump: 0.8
-  ReadyToWallJump: 0
-  wallJumpDirection: {x: -1, y: -0}
   isWallJumping: 0
+  wallCheckInAir: 0
 --- !u!222 &1173445353
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -787,6 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller2D: {fileID: 1173445352}
   speed: 25
+  runSpeed: 100
 --- !u!114 &1173445358
 MonoBehaviour:
   m_ObjectHideFlags: 0

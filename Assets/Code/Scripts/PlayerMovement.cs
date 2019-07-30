@@ -10,18 +10,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("Controller")]
     [SerializeField] private CharacterController2D controller2D;
     [SerializeField, Range(0, 50f)] private float speed = 50f;
+    [SerializeField, Range(0, 100f)] private float runSpeed = 100f;
 
     private Vector2 moveDirection;
     private bool crouch;
     private bool jump;
     private bool climb;
-
-
-
-
+    float moveSpeed;
     // Use this for initialization
     private void Awake()
     {
+        moveSpeed = speed;
     }
 
     // Update is called once per frame
@@ -35,15 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical")); ;
         crouch = Input.GetAxisRaw("Vertical") < 0;
-        if (Input.GetButtonDown("Jump")) jump = true;
-        climb = Input.GetButton("Fire3");
+        jump = Input.GetButtonDown("Jump");
+        climb = Input.GetButton("Fire1");
+        speed = Input.GetButton("Fire3") ? runSpeed : moveSpeed;
 
     }
     private void FixedUpdate()
     {
         controller2D.Move(moveDirection * Time.deltaTime, jump, crouch, climb);
         jump = false;
-
     }
     public Vector2 MoveDirection { get { return moveDirection; } }
 
