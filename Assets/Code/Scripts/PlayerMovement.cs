@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch;
     private bool jump;
     private bool climb;
+    private bool dash;
     float moveSpeed;
     // Use this for initialization
     private void Awake()
@@ -32,16 +33,17 @@ public class PlayerMovement : MonoBehaviour
     private void Inputs()
     {
 
-        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical")); ;
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical")*speed); ;
         crouch = Input.GetAxisRaw("Vertical") < 0;
         jump = Input.GetButtonDown("Jump");
         climb = Input.GetButton("Fire1");
         speed = Input.GetButton("Fire3") ? runSpeed : moveSpeed;
+        dash = Input.GetButtonDown("Fire2");
 
     }
     private void FixedUpdate()
     {
-        controller2D.Move(moveDirection * Time.deltaTime, jump, crouch, climb);
+        controller2D.Move(moveDirection * Time.deltaTime, jump, crouch, climb,dash);
         jump = false;
     }
     public Vector2 MoveDirection { get { return moveDirection; } }

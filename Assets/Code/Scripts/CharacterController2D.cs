@@ -19,18 +19,23 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField, Range(0, .1f), BoxGroup("Values")] private float movementSmoothing = .05f;
     [SerializeField, BoxGroup("Values"),] private Vector2 wallJumpForce;
     [SerializeField, BoxGroup("Values")] private float jumpforce;
+    [SerializeField, BoxGroup("Values")] private float dashForce;
     [SerializeField, BoxGroup("Values")] private float wallSlideSpeed;
     [SerializeField, BoxGroup("Values")] private float climpSpeed;
+    [SerializeField, BoxGroup("Values")] private float coolDownDash;
 
     [Space]
     [SerializeField, BoxGroup("Booleans")] private bool canWallSlide = false;
-    [SerializeField, BoxGroup("Booleans")] private bool wallJump;
-    [SerializeField, BoxGroup("Booleans")] private bool ControlAir;
+    [SerializeField, BoxGroup("Booleans")] private bool canDash;
+    [SerializeField, BoxGroup("Booleans")] private bool canclimb;
+    [SerializeField, BoxGroup("Booleans")] private bool canWallJump;
+    [SerializeField, BoxGroup("Booleans")] private bool CanControlAir;
 
     [Space]
     [SerializeField, ReadOnly, BoxGroup("States")] private bool isGrounded;
     [SerializeField, ReadOnly, BoxGroup("States")] private bool facingRight = true;
     [SerializeField, ReadOnly, BoxGroup("States")] private bool isWallJumping = false;
+    [SerializeField, ReadOnly, BoxGroup("States")] private bool isDashing;
     [SerializeField, ReadOnly, BoxGroup("States")] private bool wallCheckInAir = false;
 
 
@@ -42,6 +47,7 @@ public class CharacterController2D : MonoBehaviour
     private bool isClimbing = false;
     private bool airControl = true;
     private Vector2 wallJumpDirection;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,9 +60,8 @@ public class CharacterController2D : MonoBehaviour
 
         isWallJumping = !isGrounded;
 
-        if (wallJump)
-            if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, wallCheck, whatIsGround))
-                wallJumpDirection = wallRayCheck.normal;
+        if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, wallCheck, whatIsGround))
+            if (canWallJump) wallJumpDirection = wallRayCheck.normal;
 
 
 
@@ -67,8 +72,9 @@ public class CharacterController2D : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(bottomCheck.position, checkBoxSize);
     }
-    public void Move(Vector2 dir, bool jump, bool crouch, bool climb)
+    public void Move(Vector2 dir, bool jump, bool crouch, bool climb, bool dash)
     {
+
 
         if (!isClimbing && (airControl || isGrounded))
         {
@@ -83,19 +89,18 @@ public class CharacterController2D : MonoBehaviour
 
         if (crouch && isGrounded)
             dir.x = 0;
-        
-        DynamicMoves(dir, jump, climb);
-       
-        
+
+        DynamicMoves(dir, jump, climb, dash);
+
 
 
     }
 
-    private void DynamicMoves(Vector2 dir, bool jump, bool climb)
+    private void DynamicMoves(Vector2 dir, bool jump, bool climb, bool dash)
     {
         wallCheckInAir = wallRayCheck && !isGrounded && dir.x * wallJumpDirection.x < 0;
 
-        if (wallRayCheck && climb)
+        if (wallRayCheck && climb && canclimb)
         {
             isClimbing = Climb(dir);
             if (jump && !isGrounded)
@@ -111,13 +116,43 @@ public class CharacterController2D : MonoBehaviour
             Jump(jumpforce);
         else if (wallCheckInAir && jump)
             WallJump();
+        if (!isDashing && dash && canDash)
+            Dash(dir);
+
+
     }
+
+    private void Dash(Vector2 dir)
+    {
+
+        if (dir != Vector2.zero)
+        {
+
+            StartCoroutine(DisableMove(.1f));
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            rb.velocity += dir.normalized * dashForce;
+            StartCoroutine(DashCooldown(.5f));
+        }
+        else
+        {
+            StartCoroutine(DisableMove(.1f));
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            rb.velocity += (Vector2)transform.forward * dashForce;
+            StartCoroutine(DashCooldown(.5f));
+        }
+
+
+    }
+
+
 
     private bool Climb(Vector2 dir)
     {
         rb.gravityScale = 0;
 
-        targetVelocity = new Vector2(0, dir.y * climpSpeed * 10f);
+        targetVelocity = new Vector2(0, dir.y * climpSpeed);
 
         rb.velocity = targetVelocity;
         return isClimbing = true;
@@ -174,7 +209,13 @@ public class CharacterController2D : MonoBehaviour
     {
         airControl = false;
         yield return new WaitForSeconds(timeDisable);
-        airControl = ControlAir;
+        airControl = CanControlAir;
+    }
+    IEnumerator DashCooldown(float time)
+    {
+        isDashing = true;
+        yield return new WaitForSeconds(time);
+        isDashing = false;
     }
     public bool IsGrounded { get { return isGrounded; } }
 }
