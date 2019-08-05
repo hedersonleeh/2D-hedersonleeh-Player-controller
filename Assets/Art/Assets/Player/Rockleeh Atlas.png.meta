@@ -8641,7 +8641,7 @@ TextureImporter:
       name: Rock Leeh Dash_2
       rect:
         serializedVersion: 2
-        x: 156
+        x: 139
         y: 233
         width: 60
         height: 43
@@ -8681,7 +8681,7 @@ TextureImporter:
       name: Rock Leeh Dash_0
       rect:
         serializedVersion: 2
-        x: 31
+        x: 22
         y: 229
         width: 39
         height: 46
@@ -8701,7 +8701,7 @@ TextureImporter:
       name: Rock Leeh Dash_1
       rect:
         serializedVersion: 2
-        x: 89
+        x: 88
         y: 232
         width: 39
         height: 41
@@ -9026,7 +9026,7 @@ TextureImporter:
         width: 45
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

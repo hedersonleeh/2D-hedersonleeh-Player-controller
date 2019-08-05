@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void Inputs()
     {
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); ;
-        crouch = Input.GetAxisRaw("Vertical") < 0;
+        crouch = Input.GetAxisRaw("Vertical") <= -0.8f;
         jump = Input.GetButtonDown("Jump");
         climb = Input.GetButton("Fire1");
         speed = Input.GetButton("Fire3") ? runSpeed : moveSpeed;
