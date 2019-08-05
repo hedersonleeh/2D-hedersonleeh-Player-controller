@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 1173445353}
   - component: {fileID: 1173445355}
   - component: {fileID: 1173445356}
+  - component: {fileID: 1173445359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -615,7 +616,7 @@ MonoBehaviour:
   movementSmoothing: 0.076
   wallJumpForce: {x: 400, y: 400}
   jumpforce: 700
-  dashForce: 10
+  dashForce: 30
   wallSlideSpeed: 2
   climpSpeed: 15
   coolDownDash: 0.3
@@ -706,9 +707,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1173445352}
-  fallMultiplier: 3
-  lowJumpMultiplier: 15
-  gravity: 2
+  fallMultiplier: 2
+  lowJumpMultiplier: 10
+  gravity: 1
+--- !u!114 &1173445359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1173445348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca57274f6f7bd54a8d4e1aa78a5a672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1173445352}
+  playerScript: {fileID: 1173445357}
+  animator: {fileID: 1173445349}
 --- !u!1 &1326630774
 GameObject:
   m_ObjectHideFlags: 0

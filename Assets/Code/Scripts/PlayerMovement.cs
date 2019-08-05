@@ -32,18 +32,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Inputs()
     {
-
-        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical")*speed); ;
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); ;
         crouch = Input.GetAxisRaw("Vertical") < 0;
         jump = Input.GetButtonDown("Jump");
         climb = Input.GetButton("Fire1");
         speed = Input.GetButton("Fire3") ? runSpeed : moveSpeed;
         dash = Input.GetButtonDown("Fire2");
-
     }
     private void FixedUpdate()
     {
-        controller2D.Move(moveDirection * Time.deltaTime, jump, crouch, climb,dash);
+        controller2D.Move(moveDirection * speed * Time.deltaTime, jump, crouch, climb, dash);
         jump = false;
     }
     public Vector2 MoveDirection { get { return moveDirection; } }
@@ -51,4 +49,6 @@ public class PlayerMovement : MonoBehaviour
     public bool Crouch { get { return crouch; } }
 
     public bool Jump { get { return jump; } }
+
+    public bool Dash { get { return dash; } }
 }

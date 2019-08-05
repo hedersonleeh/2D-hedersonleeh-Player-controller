@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using NaughtyAttributes;
 using System;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -63,41 +61,24 @@ public class CharacterController2D : MonoBehaviour
         if (wallRayCheck = Physics2D.Raycast((Vector2)transform.position, transform.right, wallCheck, whatIsGround))
             if (canWallJump) wallJumpDirection = wallRayCheck.normal;
 
-
-
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawRay(transform.position, transform.right * wallCheck);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(bottomCheck.position, checkBoxSize);
     }
     public void Move(Vector2 dir, bool jump, bool crouch, bool climb, bool dash)
     {
-
-
         if (!isClimbing && (airControl || isGrounded))
         {
-            targetVelocity = new Vector2(dir.x * 10f, rb.velocity.y);
+            if (!crouch)
+            {
+                targetVelocity = new Vector2(dir.x * 10f, rb.velocity.y);
 
-            if (!isWallJumping)
-                rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
-            else
-                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.2f), rb.velocity.y);
-            ChangeFace(dir.x);
+                if (!isWallJumping)
+                    rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+                else
+                    rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetVelocity.x, 0.2f), rb.velocity.y);
+                ChangeFacing(dir.x);
+            }
+
         }
 
-        if (crouch && isGrounded)
-            dir.x = 0;
-
-        DynamicMoves(dir, jump, climb, dash);
-
-
-
-    }
-
-    private void DynamicMoves(Vector2 dir, bool jump, bool climb, bool dash)
-    {
         wallCheckInAir = wallRayCheck && !isGrounded && dir.x * wallJumpDirection.x < 0;
 
         if (wallRayCheck && climb && canclimb)
@@ -109,25 +90,31 @@ public class CharacterController2D : MonoBehaviour
         else
             isClimbing = false;
 
+
         if (canWallSlide && rb.velocity.y < 0 && wallCheckInAir)
             if (!climb) WallSlide(wallSlideSpeed);
+
 
         if (isGrounded && jump)
             Jump(jumpforce);
         else if (wallCheckInAir && jump)
             WallJump();
+
         if (!isDashing && dash && canDash)
             Dash(dir);
+    }
 
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(transform.position, transform.right * wallCheck);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(bottomCheck.position, checkBoxSize);
     }
 
     private void Dash(Vector2 dir)
     {
-
         if (dir != Vector2.zero)
         {
-
             StartCoroutine(DisableMove(.1f));
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
@@ -142,11 +129,7 @@ public class CharacterController2D : MonoBehaviour
             rb.velocity += (Vector2)transform.forward * dashForce;
             StartCoroutine(DashCooldown(.5f));
         }
-
-
     }
-
-
 
     private bool Climb(Vector2 dir)
     {
@@ -168,7 +151,7 @@ public class CharacterController2D : MonoBehaviour
         rb.AddForce(Vector2.up * force * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-    private void ChangeFace(float dir)
+    private void ChangeFacing(float dir)
     {
         if (isWallJumping)
         {
@@ -218,4 +201,7 @@ public class CharacterController2D : MonoBehaviour
         isDashing = false;
     }
     public bool IsGrounded { get { return isGrounded; } }
+    public bool IsWallJumping { get { return isWallJumping; } }
+
+    public bool IsDashing { get { return isDashing; } }
 }

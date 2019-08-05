@@ -14,33 +14,33 @@ TextureImporter:
     21300018: Rock Leeh Walk_3
     21300020: Rock Leeh Walk_4
     21300022: Rock Leeh Walk_5
-    21300024: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_12
-    21300026: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_13
-    21300028: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_14
-    21300030: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_15
-    21300032: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_16
-    21300034: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_17
+    21300024: Rock Leeh Run_0
+    21300026: Rock Leeh Run_1
+    21300028: Rock Leeh Run_2
+    21300030: Rock Leeh Run_3
+    21300032: Rock Leeh Run_4
+    21300034: Rock Leeh Run_5
     21300036: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_18
-    21300038: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_19
-    21300040: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_20
-    21300042: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_21
-    21300044: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_22
-    21300046: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_23
-    21300048: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_24
-    21300050: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_25
-    21300052: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_26
-    21300054: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_27
-    21300056: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_28
-    21300058: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_29
-    21300060: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_30
+    21300038: Rock Leeh Crouch_0
+    21300040: Rock Leeh Crouch_1
+    21300042: Rock Leeh Crouch_2
+    21300044: Rock Leeh Crouch_3
+    21300046: Rock Leeh Crouch_4
+    21300048: Rock Leeh Crouch_5
+    21300050: Rock Leeh Crouch_6
+    21300052: Rock Leeh Jump_0
+    21300054: Rock Leeh Jump_1
+    21300056: Rock Leeh Jump_2
+    21300058: Rock Leeh Jump_3
+    21300060: Rock Leeh Jump_4
     21300062: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_31
-    21300064: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_32
+    21300064: Rock Leeh Jump_5
     21300066: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_33
     21300068: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_34
-    21300070: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_35
-    21300072: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_36
+    21300070: Rock Leeh Jump_6
+    21300072: Rock Leeh Jump_7
     21300074: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_37
-    21300076: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_38
+    21300076: Rock Leeh Jump_8
     21300078: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_39
     21300080: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_40
     21300082: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_41
@@ -407,15 +407,15 @@ TextureImporter:
     21300804: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_402
     21300806: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_403
     21300808: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_404
-    21300810: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_405
+    21300810: Rock Leeh Dash_6
     21300812: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_406
-    21300814: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_407
-    21300816: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_408
+    21300814: Rock Leeh Dash_2
+    21300816: Rock Leeh Dash_5
     21300818: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_409
     21300820: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_410
-    21300822: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_411
-    21300824: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_412
-    21300826: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_413
+    21300822: Rock Leeh Dash_0
+    21300824: Rock Leeh Dash_1
+    21300826: Rock Leeh Dash_3
     21300828: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_414
     21300830: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_415
     21300832: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_416
@@ -435,6 +435,7 @@ TextureImporter:
     21300860: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_430
     21300862: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_431
     21300864: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_432
+    21300866: Rockleeh Atlas_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -757,7 +758,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_12
+      name: Rock Leeh Run_0
       rect:
         serializedVersion: 2
         x: 14
@@ -777,11 +778,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_13
+      name: Rock Leeh Run_1
       rect:
         serializedVersion: 2
         x: 61
-        y: 2673
+        y: 2672
         width: 44
         height: 42
       alignment: 0
@@ -797,11 +798,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_14
+      name: Rock Leeh Run_2
       rect:
         serializedVersion: 2
         x: 112
-        y: 2676
+        y: 2675
         width: 48
         height: 38
       alignment: 0
@@ -817,7 +818,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_15
+      name: Rock Leeh Run_3
       rect:
         serializedVersion: 2
         x: 168
@@ -837,7 +838,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_16
+      name: Rock Leeh Run_4
       rect:
         serializedVersion: 2
         x: 216
@@ -857,7 +858,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_17
+      name: Rock Leeh Run_5
       rect:
         serializedVersion: 2
         x: 273
@@ -897,7 +898,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_19
+      name: Rock Leeh Crouch_0
       rect:
         serializedVersion: 2
         x: 24
@@ -917,7 +918,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_20
+      name: Rock Leeh Crouch_1
       rect:
         serializedVersion: 2
         x: 68
@@ -937,7 +938,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_21
+      name: Rock Leeh Crouch_2
       rect:
         serializedVersion: 2
         x: 113
@@ -957,7 +958,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_22
+      name: Rock Leeh Crouch_3
       rect:
         serializedVersion: 2
         x: 155
@@ -977,7 +978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_23
+      name: Rock Leeh Crouch_4
       rect:
         serializedVersion: 2
         x: 198
@@ -997,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_24
+      name: Rock Leeh Crouch_5
       rect:
         serializedVersion: 2
         x: 246
@@ -1017,7 +1018,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_25
+      name: Rock Leeh Crouch_6
       rect:
         serializedVersion: 2
         x: 298
@@ -1037,7 +1038,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_26
+      name: Rock Leeh Jump_0
       rect:
         serializedVersion: 2
         x: 4
@@ -1057,7 +1058,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_27
+      name: Rock Leeh Jump_1
       rect:
         serializedVersion: 2
         x: 44
@@ -1077,7 +1078,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_28
+      name: Rock Leeh Jump_2
       rect:
         serializedVersion: 2
         x: 82
@@ -1097,7 +1098,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_29
+      name: Rock Leeh Jump_3
       rect:
         serializedVersion: 2
         x: 140
@@ -1117,7 +1118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_30
+      name: Rock Leeh Jump_4
       rect:
         serializedVersion: 2
         x: 201
@@ -1157,7 +1158,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_32
+      name: Rock Leeh Jump_5
       rect:
         serializedVersion: 2
         x: 285
@@ -1217,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_35
+      name: Rock Leeh Jump_6
       rect:
         serializedVersion: 2
         x: 359
@@ -1237,7 +1238,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_36
+      name: Rock Leeh Jump_7
       rect:
         serializedVersion: 2
         x: 408
@@ -1277,7 +1278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_38
+      name: Rock Leeh Jump_8
       rect:
         serializedVersion: 2
         x: 498
@@ -8617,7 +8618,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_405
+      name: Rock Leeh Dash_6
       rect:
         serializedVersion: 2
         x: 301
@@ -8637,27 +8638,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_406
-      rect:
-        serializedVersion: 2
-        x: 353
-        y: 286
-        width: 18
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cfbc3f5299e30f64f81a790d7f0063ba
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_407
+      name: Rock Leeh Dash_2
       rect:
         serializedVersion: 2
         x: 156
@@ -8677,7 +8658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_408
+      name: Rock Leeh Dash_5
       rect:
         serializedVersion: 2
         x: 258
@@ -8697,47 +8678,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_409
-      rect:
-        serializedVersion: 2
-        x: 349
-        y: 275
-        width: 10
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6db355ad99ee33e46a5f36ec5b72e2ef
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_410
-      rect:
-        serializedVersion: 2
-        x: 371
-        y: 273
-        width: 15
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 292cd1a4847206e42beb11c009d970e7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_411
+      name: Rock Leeh Dash_0
       rect:
         serializedVersion: 2
         x: 31
@@ -8757,7 +8698,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_412
+      name: Rock Leeh Dash_1
       rect:
         serializedVersion: 2
         x: 89
@@ -8777,7 +8718,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_413
+      name: Rock Leeh Dash_3
       rect:
         serializedVersion: 2
         x: 220
@@ -8837,46 +8778,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_416
-      rect:
-        serializedVersion: 2
-        x: 347
-        y: 253
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9bc1efb6e57675948a07e645c108ff90
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_417
-      rect:
-        serializedVersion: 2
-        x: 372
-        y: 256
-        width: 18
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d6af0b8ecac4853449aea6ac648f2576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_418
       rect:
         serializedVersion: 2
@@ -8912,66 +8813,6 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e66559113ef982548916f33bff8a42bc
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_420
-      rect:
-        serializedVersion: 2
-        x: 349
-        y: 238
-        width: 10
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ab97acdc3f82cc438dbc9b56f153809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_421
-      rect:
-        serializedVersion: 2
-        x: 371
-        y: 239
-        width: 15
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 68f40c9724eb80b4eb2a8005d0a7f87c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game Boy Advance - Naruto Ninja Council 2 - Rock Lee Version 1_422
-      rect:
-        serializedVersion: 2
-        x: 353
-        y: 214
-        width: 18
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 162d0c6e4017c424ea8a6dfda7d7e229
       vertices: []
       indices: 
       edges: []
@@ -9172,6 +9013,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 30e08f76a82392e47b792a4bbeac93be
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rockleeh Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 209
+        width: 45
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c84c6c7b63d6a5041bbe55aaaff502d8
       vertices: []
       indices: 
       edges: []
